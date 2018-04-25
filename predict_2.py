@@ -28,6 +28,7 @@ http://niektemme.com/ @@to do
 import sys
 import tensorflow as tf
 from PIL import Image, ImageFilter
+from mnist import MNIST
 
 def predictint(imvalue):
     """
@@ -143,9 +144,13 @@ def main(argv):
     """
     Main function.
     """
-    imvalue = imageprepare(argv)
-    predint = predictint(imvalue)
-    print (predint[0]) #first value in list
+    #imvalue = imageprepare(argv)
+    mndata = MNIST('../mnist-dataset')
+    images, labels = mndata.load_training()
+
+    for i in images:
+        predint = predictint(imvalue)
+        print (predint[0]) #first value in list
     
 if __name__ == "__main__":
     main(sys.argv[1])
